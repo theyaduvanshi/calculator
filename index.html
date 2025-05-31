@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buy Now vs. Wait Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+      }
+
+      .main-div {
+        display: flex;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .background-container {
+        background-color: #0b57c4;
+        width: 60%;
+        height: -webkit-fill-available;
+        overflow-y: auto;
+        padding: 2rem;
+        box-sizing: border-box;
+        position: relative;
+      }
+
+      .section {
+        display: block;
+        width: 600px;
+        background-color: #ffffff;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .card {
+        padding: 2rem;
+        background-color: #ffffff;
+      }
+
+      .logo {
+        font-size: 48px;
+        font-weight: bold;
+      }
+
+      .title {
+        font-size: 28px;
+        margin-bottom: 1rem;
+      }
+
+      .subtitle,
+      .description {
+        margin-bottom: 1rem;
+        font-size: 22px;
+      }
+
+      .description {
+        font-size: 16px;
+      }
+
+      .start-button {
+        background-color: #f95738;
+        color: rgb(0, 0, 0);
+        padding: 0.5rem 3rem;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .start-button:hover {
+        background-color: yellow;
+      }
+
+      .input-group {
+        margin-bottom: 1rem;
+      }
+
+      .input-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .input-group div {
+        display: flex;
+        align-items: center;
+        text-align: end;
+        justify-content: space-between;
+      }
+
+      .input-group button {
+        padding: 0.3rem 0.6rem;
+        font-size: 1rem;
+        cursor: pointer;
+        background-color: rgb(206 234 248);
+        border: none;
+      }
+
+      .input-group span,
+      .input-group select {
+        display: block;
+        margin-top: 0.3rem;
+      }
+
+      .btn-group {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      .Finalsec {
+        width: 94%;
+      }
+
+      /* Custom rectangular style for the range input */
+      input[type="range"] {
+        width: 200px;
+        height: 2px;
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: #000000;
+        outline: none;
+        transition: background-color 0.3s;
+        padding: 0;
+        margin: 0;
+      }
+
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 8px;
+        height: 30px;
+
+        background-color: #f95738;
+        cursor: pointer;
+      }
+
+      .startbtn {
+        display: flex;
+        justify-content: end;
+        padding-top: 2rem;
+      }
+
+      .Financial-right-sec {
+        width: 192px;
+        float: left;
+        overflow: hidden;
+        padding: 0px;
+        margin: 0px;
+        background: #ff80aa;
+      }
+
+      .Details-right-sec-right-sec {
+        width: 192px;
+        float: left;
+        overflow: hidden;
+        padding: 0px;
+        margin: 0px;
+        background: #ff80aa;
+      }
+
+      .Financial-right-sec p {
+        font-size: 16px;
+        padding: 1rem;
+      }
+
+      .Details-right-sec p {
+        font-size: 16px;
+        padding: 1rem;
+      }
+
+      .Financial-left-sec {
+        padding: 2rem;
+      }
+
+      .Financial-sec {
+        display: flex;
+      }
+
+      .nextBtn {
+        background-color: #f95738;
+        color: rgb(0, 0, 0);
+        padding: 0.5rem 3rem;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .nextBtn:hover {
+        background-color: yellow;
+      }
+
+      .backBtn {
+        color: rgb(0, 0, 0);
+        padding: 0.5rem 3rem;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .backBtn:hover {
+        background-color: yellow;
+      }
+
+      #resultsSection {
+        padding: 2rem;
+        width: 94%;
+      }
+
+      .credit {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .credit select {
+        border: none;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 7px 40px;
+      }
+
+      .value {
+        background-color: #f0f0f0;
+        padding: 0.2rem 1rem;
+        width: 22%;
+        text-align: end !important;
+      }
+
+      .monthly-rent,
+      .monthly-savings {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .high-range,
+      .start-range {
+        color: #c7c7c7;
+      }
+
+      .start-range-and-high-range {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .monthly-div {
+        display: flex;
+        align-items: start !important;
+      }
+
+      .Details-right-sec {
+        width: 192px;
+        float: left;
+        overflow: hidden;
+        padding: 0px;
+        margin: 0px;
+        background: #ff80aa;
+      }
+
+      .Details-sec {
+        display: flex;
+      }
+
+      .Details-left-sec {
+        padding: 2rem;
+      }
+
+      .advantages-section {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .advantages-title {
+        text-align: center;
+        font-size: 2em;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .advantage-title {
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        color: #ffffff;
+        cursor: pointer;
+        background-color: #f95738;
+        padding: 2px 4px;
+        font-size: 14px;
+      }
+
+      .advantage-icon {
+        font-size: 1.2em;
+      }
+
+      .advantage {
+        display: grid;
+        gap: 2px;
+      }
+
+      .advantage-details {
+        display: none;
+        margin-top: 10px;
+        color: #000000;
+      }
+
+      .advantage.open .advantage-details {
+        display: block;
+      }
+
+      .Final-Results {
+        display: flex;
+      }
+
+      .resultsSection-right-side {
+        width: 40%;
+        padding-left: 2rem;
+      }
+
+      .resultsSection-left-side {
+        width: 65%;
+      }
+
+      .advantage-input-group label {
+        font-size: 14px;
+      }
+
+      .input-group.advantage-input-group.credit {
+        display: flex !important;
+      }
+
+      .input-section .input-group {
+        display: flex !important;
+      }
+
+      .advantage-input-group {
+        margin-bottom: 0rem;
+        display: block !important;
+      }
+
+      .advantage-high-range,
+      .advantage-start-range {
+        font-size: 12px;
+      }
+
+      .advantage-input-group button {
+        padding: 0.1rem 0.4rem;
+      }
+
+      .rescontpnl {
+        font-size: 12px;
+      }
+
+      .opthdglab {
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .input-section {
+        max-width: 400px;
+        font-family: Arial, sans-serif;
+      }
+
+      .input-group {
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 15px;
+      }
+
+      .input-label {
+        flex: 1;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .input-field {
+        flex: 1;
+        padding: 5px 8px;
+        font-size: 14px;
+        background-color: #f3f3fa;
+        border: none;
+      }
+
+      .buy-wait-heading {
+        color: #0056d2;
+      }
+
+      .highlight {
+        font-weight: bold;
+        color: #000;
+      }
+
+      .section-header {
+        color: #000;
+        font-weight: bold;
+        padding: 8px;
+        cursor: pointer;
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+      }
+
+      .section-header:hover {
+        opacity: 0.6;
+      }
+
+      .icon {
+        margin-right: 10px;
+        font-weight: bold;
+        padding: 2px 8px;
+        color: white;
+      }
+
+      .plus-icon {
+        background-color: #0f5bc1;
+      }
+
+      .minus-icon {
+        background-color: #ff5c2e;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #eee;
+      }
+      .comparison-table td:nth-child(1) {
+        background-color: #e3f0ff;
+      }
+
+      .comparison-table td:nth-child(2) {
+        background-color: #ffe5e5;
+      }
+
+      .comparison-table table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        border: 1px solid #ccc;
+        padding: 12px;
+        text-align: left;
+        font-size: 14px;
+      }
+
+      .comparison-table th {
+        color: white;
+      }
+
+      .buy-now {
+        background-color: #0066cc;
+      }
+
+      .cost-to-wait {
+        background-color: #ff4d00;
+      }
+
+      .blue-text {
+        color: #0066cc;
+        font-weight: bold;
+      }
+
+      .orange-text {
+        color: #ff4d00;
+        font-weight: bold;
+      }
+      .parasize {
+        font-size: 14px;
+      }
+      .highlight-yellow {
+        background-color: #fbed46;
+        font-weight: bold;
+      }
+      div#grand-section {
+        font-size: 14px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main-div">
+      <div class="background-container">
+        <!-- Section 1: Intro -->
+        <div id="introSection" class="section">
+          <div class="card">
+            <h1 class="logo">MGIC</h1>
+            <h2 class="title">Buy Now vs. Wait Calculator</h2>
+            <p class="subtitle">
+              <strong
+                >Did you know that you can buy a home with less than a 20% down
+                payment?</strong
+              >
+            </p>
+            <p class="description">
+              Waiting to save 20% down can save you money in some areas, but it
+              could
+              <strong>cost you money</strong> in others. Our calculator can help
+              you determine if buying a home right now might be the better
+              choice for you.
+            </p>
+            <div class="startbtn">
+              <button class="start-button" onclick="goToSection('formSection')">
+                start
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Section 2: Financial Snapshot -->
+        <div id="formSection" class="section hidden">
+          <div class="Financial-sec">
+            <div class="Financial-left-sec">
+              <h3>Give us a snapshot of your current financial situation.</h3>
+              <div class="input-group">
+                <label>Your monthly rent</label>
+                <div class="monthly-div">
+                  <div class="monthly-rent">
+                    <div style="display: block">
+                      <div>
+                        <button onclick="adjustSlider(this, -100)">–</button>
+                        <input
+                          type="range"
+                          min="0"
+                          max="12000"
+                          value="1300"
+                          step="100"
+                        />
+                        <button onclick="adjustSlider(this, 100)">+</button>
+                      </div>
+                      <div class="start-range-and-high-range">
+                        <p class="start-range">$0</p>
+                        <p class="high-range">$1,2000</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="value">
+                    <div><span>$1,300</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label>Your monthly savings contributions</label>
+                <div class="monthly-div">
+                  <div class="monthly-rent">
+                    <div style="display: block">
+                      <div>
+                        <button onclick="adjustSlider(this, -100)">–</button>
+                        <input
+                          type="range"
+                          min="0"
+                          max="15000"
+                          value="500"
+                          step="100"
+                        />
+                        <button onclick="adjustSlider(this, 100)">+</button>
+                      </div>
+                      <div class="start-range-and-high-range">
+                        <p class="start-range">$0</p>
+                        <p class="high-range">$1,5000</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="value">
+                    <div><span>$1,300</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-group credit">
+                <label>Your credit</label>
+                <select>
+                  <option>Excellent</option>
+                  <option>Good</option>
+                  <option>Fair</option>
+                  <option>Poor</option>
+                </select>
+              </div>
+
+              <div class="btn-group">
+                <button onclick="goToSection('introSection')" class="backBtn">
+                  back
+                </button>
+                <button
+                  onclick="goToSection('homeDetailsSection')"
+                  class="nextBtn"
+                >
+                  next
+                </button>
+              </div>
+            </div>
+
+            <div class="Financial-right-sec">
+              <p>
+                Did you know your credit is just as important as your savings
+                for lenders deciding whether or not to approve a loan?
+                <br />
+                <br />
+                Learn all about credit at
+                <a
+                  class="ilnk"
+                  href="https://readynest.com/getting-ready-to-buy-a-house/credit-basics?utm_source=visualcalc&amp;#038;utm_medium=website&amp;#038;utm_campaign=bvw-calculator&amp;#038;utm_term=visualcalc-sidebar&amp;#038;utm_content=v1-embed"
+                  target="_blank"
+                  >readynest.com</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Home Details -->
+        <div id="homeDetailsSection" class="section hidden">
+          <div class="Details-sec">
+            <div class="Details-left-sec">
+              <h3>Tell us a little bit about the home you'd like to buy.</h3>
+
+              <div class="input-group">
+                <label>Home price</label>
+                <div class="monthly-div">
+                  <div class="monthly-rent">
+                    <div style="display: block">
+                      <div>
+                        <button onclick="adjustSlider(this, -10000)">–</button>
+                        <input
+                          type="range"
+                          min="0"
+                          max="1000000"
+                          value="300000"
+                          step="10000"
+                        />
+                        <button onclick="adjustSlider(this, 10000)">+</button>
+                      </div>
+                      <div class="start-range-and-high-range">
+                        <p class="start-range">$0</p>
+                        <p class="high-range">$1,000,000</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="value">
+                    <div><span>$300,000</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label>Amount you can afford for a down payment</label>
+                <div class="monthly-div">
+                  <div class="monthly-rent">
+                    <div style="display: block">
+                      <div>
+                        <button onclick="adjustSlider(this, -1000)">–</button>
+                        <input
+                          type="range"
+                          min="0"
+                          max="200000"
+                          value="15000"
+                          step="1000"
+                        />
+                        <button onclick="adjustSlider(this, 1000)">+</button>
+                      </div>
+                      <div class="start-range-and-high-range">
+                        <p class="start-range">$0</p>
+                        <p class="high-range">$200,000</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="value">
+                    <div><span>$15,000</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label>Estimated mortgage interest rate</label>
+                <div class="monthly-div">
+                  <div class="monthly-rent">
+                    <div style="display: block">
+                      <div>
+                        <button onclick="adjustSlider(this, -0.125)">–</button>
+                        <input
+                          type="range"
+                          min="0"
+                          max="10"
+                          step="0.125"
+                          value="6.5"
+                        />
+                        <button onclick="adjustSlider(this, 0.125)">+</button>
+                      </div>
+                      <div class="start-range-and-high-range">
+                        <p class="start-range">0.000%</p>
+                        <p class="high-range">10.000%</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="value">
+                    <div><span>6.5%</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="btn-group">
+                <button onclick="goToSection('formSection')" class="backBtn">
+                  back
+                </button>
+                <button onclick="goToSection('resultsSection')" class="nextBtn">
+                  next
+                </button>
+              </div>
+            </div>
+            <div class="Details-right-sec">
+              <p>
+                Right now, you have a 5% down payment in savings based on your
+                desired home price. Did you know with MGIC mortgage insurance
+                you can buy with as little as 3% down?
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: Final Results -->
+        <div id="resultsSection" class="section hidden">
+          <div class="Final-Results">
+            <div class="resultsSection-left-side">
+              <h2 class="buy-wait-heading">buy now vs. the cost to wait</h2>
+              <p class="parasize">
+                <span class="highlight">You're ready to buy now!</span> Rather
+                than wait <strong>11.17 years</strong> before you buy, it's
+                possible to buy now with as little as <strong>3%</strong> down
+                or <strong>$9,000</strong>. Consider this: if you buy now, after
+                11.17 years you will have reached <strong>$182,880</strong> in
+                home equity. Rent payments build zero equity.
+              </p>
+
+              <div class="comparison-table parasize">
+                <table>
+                  <tr>
+                    <th class="buy-now">Buy now</th>
+                    <th class="cost-to-wait">Cost to wait</th>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="blue-text">Buy Now</span> with your 66% down
+                      payment
+                    </td>
+                    <td>
+                      <span class="orange-text">0.00 years</span> to save 20%
+                      down payment
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="blue-text">$126,000</span> buy now down
+                      payment
+                    </td>
+                    <td>
+                      <span class="orange-text">$126,000</span> future down
+                      payment
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="blue-text">$0</span> lost on rent payments if
+                      you buy now!
+                    </td>
+                    <td>
+                      <span class="orange-text">$0</span> total rent paid while
+                      waiting
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><span class="blue-text">$190,000</span> home price</td>
+                    <td>
+                      <span class="orange-text">$190,000</span> home price due
+                      to appreciation
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <!-- Monthly Payment Section -->
+              <div class="section-header" onclick="toggleMonthlyTable(this)">
+                <span class="icon plus-icon">+</span>Monthly payment snapshot
+              </div>
+              <div id="monthly-table" class="parasize" style="display: none">
+                <table>
+                  <tr style="background-color: #d6e5f4">
+                    <th style="background-color: #d6e5f4"></th>
+                    <th style="background-color: #d6e5f4">Buy now</th>
+                    <th style="background-color: #d6e5f4">Wait 11.17 years</th>
+                  </tr>
+                  <tr>
+                    <td>Principal and interest</td>
+                    <td>$1,801.39</td>
+                    <td>$2,109.26</td>
+                  </tr>
+                  <tr>
+                    <td>Taxes, HOA, insurance</td>
+                    <td>$500.00</td>
+                    <td>$692.12</td>
+                  </tr>
+                  <tr>
+                    <td>Mortgage insurance</td>
+                    <td>$66.50</td>
+                    <td>$0.00</td>
+                  </tr>
+                  <tr class="highlight-yellow">
+                    <td>Total monthly payment</td>
+                    <td>$2,367.89</td>
+                    <td>$2,801.38</td>
+                  </tr>
+                </table>
+              </div>
+              <!-- Notes always visible -->
+              <p class="parasize">
+                <strong>Buy:</strong> Low down payment - you may be eligible to
+                buy with MGIC mortgage insurance. You may be eligible to remove
+                the mortgage insurance in 5.08 years, reducing your payment by
+                $66.50.
+              </p>
+              <p class="parasize">
+                <strong>Wait:</strong> In 11.17 years, rent is projected to be
+                $1,800. Rent payments build zero equity.
+              </p>
+
+              <!-- Grand Totals Section -->
+              <div
+                class="section-header"
+                onclick="toggleSection('grand-section', this)"
+              >
+                <span class="icon plus-icon">+</span>Grand totals
+              </div>
+              <div id="grand-section" style="display: none">
+                <table>
+                  <tr>
+                    <th style="background-color: #d6e5f4"></th>
+                    <th style="background-color: #d6e5f4">Buy now</th>
+                    <th style="background-color: #d6e5f4">Wait to buy</th>
+                  </tr>
+                  <tr>
+                    <td>Savings contributions towards 20% down payment</td>
+                    <td>$0</td>
+                    <td>$67,000</td>
+                  </tr>
+                  <tr>
+                    <td>Total housing payments</td>
+                    <td>$323,608</td>
+                    <td>$203,386</td>
+                  </tr>
+                  <tr>
+                    <td>Home equity position</td>
+                    <td>$182,880</td>
+                    <td>$83,639</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="btn-group">
+                <button
+                  onclick="goToSection('homeDetailsSection')"
+                  class="backBtn"
+                >
+                  back
+                </button>
+              </div>
+            </div>
+
+            <div class="resultsSection-right-side">
+              <div class="advantage">
+                <div class="advantage open">
+                  <div class="advantage-title" onclick="toggleDetail(this)">
+                    <span class="advantage-icon">−</span>
+                    Fast Performance
+                  </div>
+
+                  <div class="advantage-details">
+                    <div class="input-group advantage-input-group">
+                      <label>Your monthly rent</label>
+                      <div class="monthly-div">
+                        <div class="monthly-rent">
+                          <div style="display: block">
+                            <div>
+                              <button onclick="adjustSlider(this, -100)">
+                                –
+                              </button>
+                              <input
+                                type="range"
+                                min="0"
+                                max="12000"
+                                value="1300"
+                                step="100"
+                              />
+                              <button onclick="adjustSlider(this, 100)">
+                                +
+                              </button>
+                            </div>
+                            <div class="start-range-and-high-range">
+                              <p class="start-range advantage-start-range">
+                                $0
+                              </p>
+                              <p class="high-range advantage-high-range">
+                                $1,2000
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="value">
+                          <div><span>$1,300</span></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="input-group advantage-input-group">
+                      <label>Your monthly savings contributions</label>
+                      <div class="monthly-div">
+                        <div class="monthly-rent">
+                          <div style="display: block">
+                            <div>
+                              <button onclick="adjustSlider(this, -100)">
+                                –
+                              </button>
+                              <input
+                                type="range"
+                                min="0"
+                                max="15000"
+                                value="500"
+                                step="100"
+                              />
+                              <button onclick="adjustSlider(this, 100)">
+                                +
+                              </button>
+                            </div>
+                            <div class="start-range-and-high-range">
+                              <p class="start-range advantage-start-range">
+                                $0
+                              </p>
+                              <p class="high-range advantage-high-range">
+                                $1,5000
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="value">
+                          <div><span>$1,300</span></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="input-group advantage-input-group credit">
+                      <label>Your credit</label>
+                      <select>
+                        <option>Excellent</option>
+                        <option>Good</option>
+                        <option>Fair</option>
+                        <option>Poor</option>
+                      </select>
+                    </div>
+
+                    <div class="input-group advantage-input-group">
+                      <label>Home price</label>
+                      <div class="monthly-div">
+                        <div class="monthly-rent">
+                          <div style="display: block">
+                            <div>
+                              <button onclick="adjustSlider(this, -10000)">
+                                –
+                              </button>
+                              <input
+                                type="range"
+                                min="0"
+                                max="1000000"
+                                value="300000"
+                                step="10000"
+                              />
+                              <button onclick="adjustSlider(this, 10000)">
+                                +
+                              </button>
+                            </div>
+                            <div class="start-range-and-high-range">
+                              <p class="start-range advantage-start-range">
+                                $0
+                              </p>
+                              <p class="high-range advantage-high-range">
+                                $1,000,000
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="value">
+                          <div><span>$300,000</span></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="input-group advantage-input-group">
+                      <label>Amount you can afford for a down payment</label>
+                      <div class="monthly-div">
+                        <div class="monthly-rent">
+                          <div style="display: block">
+                            <div>
+                              <button onclick="adjustSlider(this, -1000)">
+                                –
+                              </button>
+                              <input
+                                type="range"
+                                min="0"
+                                max="200000"
+                                value="15000"
+                                step="1000"
+                              />
+                              <button onclick="adjustSlider(this, 1000)">
+                                +
+                              </button>
+                            </div>
+                            <div class="start-range-and-high-range">
+                              <p class="start-range advantage-start-range">
+                                $0
+                              </p>
+                              <p class="high-range advantage-high-range">
+                                $200,000
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="value">
+                          <div><span>$15,000</span></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="input-group advantage-input-group">
+                      <label>Estimated mortgage interest rate</label>
+                      <div class="monthly-div">
+                        <div class="monthly-rent">
+                          <div style="display: block">
+                            <div>
+                              <button onclick="adjustSlider(this, -0.125)">
+                                –
+                              </button>
+                              <input
+                                type="range"
+                                min="0"
+                                max="10"
+                                step="0.125"
+                                value="6.5"
+                              />
+                              <button onclick="adjustSlider(this, 0.125)">
+                                +
+                              </button>
+                            </div>
+                            <div class="start-range-and-high-range">
+                              <p class="start-range advantage-start-range">
+                                0.000%
+                              </p>
+                              <p class="high-range advantage-high-range">
+                                10.000%
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="value">
+                          <div><span>6.5%</span></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="advantage">
+                  <div class="advantage-title" onclick="toggleDetail(this)">
+                    <span class="advantage-icon">+</span>
+                    Optional Settings
+                  </div>
+                  <div class="advantage-details">
+                    <div class="input-section">
+                      <div class="input-group">
+                        <label class="input-label"
+                          >Annual yield on savings</label
+                        >
+                        <input class="input-field" type="text" value="0.300%" />
+                      </div>
+                      <div class="input-group">
+                        <label class="input-label">Annual rent increase</label>
+                        <input class="input-field" type="text" value="3.00%" />
+                      </div>
+                      <div class="input-group">
+                        <label class="input-label"
+                          >Annual home value appreciation</label
+                        >
+                        <input class="input-field" type="text" value="3.00%" />
+                      </div>
+                      <div class="input-group">
+                        <label class="input-label"
+                          >Other housing expenses<br />(% of home value)</label
+                        >
+                        <input class="input-field" type="text" value="2.000%" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="advantage">
+                  <div class="advantage-title" onclick="toggleDetail(this)">
+                    <span class="advantage-icon">+</span>
+                    Learn more and other resources
+                  </div>
+                  <div class="advantage-details">
+                    <div class="rescontpnl">
+                      <div class="opthdgcover">
+                        <div class="opthdglab">Learn More</div>
+                      </div>
+                      <br />
+                      <div class="opttextcover">
+                        <div class="opttextlab">
+                          For more tips, tools and stories that will help you
+                          get ready to buy a home, visit
+                          <a
+                            class="ilnk"
+                            href="https://readynest.com/?utm_source=visualcalc&amp;#038;utm_medium=website&amp;#038;utm_campaign=bvw-calculator&amp;#038;utm_term=visualcalc-learn-section&amp;#038;utm_content=v1-embed"
+                            target="_blank"
+                            >readynest.com</a
+                          >.
+                        </div>
+                        <br />
+                      </div>
+                      <div class="opttextcover">
+                        <div class="opttextlab">
+                          If you're ready to buy now, contact a trusted mortgage
+                          lender or Realtor® to get started.
+                        </div>
+                      </div>
+                      <br />
+                      <div class="opthdgcover">
+                        <div class="opthdglab">Disclaimer</div>
+                      </div>
+                      <br />
+                      <div class="opttextcover">
+                        <div class="opttextlab">
+                          The calculator is for illustrative purposes only. The
+                          results are estimates based upon information provided
+                          and assumptions made upon the information. MGIC does
+                          not warrant the accuracy, reliability or completeness
+                          of the results.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+      // Data store for form values
+      const formData = {
+        monthlyRent: 1300,
+        monthlySavings: 500,
+        creditScore: "Excellent",
+        homePrice: 300000,
+        downPayment: 15000,
+        interestRate: 6.5,
+        annualYieldOnSavings: 0.3,
+        annualRentIncrease: 3.0,
+        annualHomeAppreciation: 3.0,
+        otherHousingExpenses: 2.0,
+      };
+
+      // IDs of all the sections in order
+      const sections = [
+        "introSection",
+        "formSection",
+        "homeDetailsSection",
+        "resultsSection",
+      ];
+
+      // Show only the selected section, hide others
+      function goToSection(sectionId) {
+        sections.forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.classList.toggle("hidden", id !== sectionId);
+          }
+        });
+
+        // Update results when going to results section
+        if (sectionId === "resultsSection") {
+          updateResults();
+        }
+      }
+
+      // Update form data when any input changes
+      function updateFormData(input) {
+        const value = parseFloat(input.value);
+        const label =
+          input.closest(".input-group").querySelector("label")?.textContent ||
+          "";
+
+        if (label.toLowerCase().includes("monthly rent")) {
+          formData.monthlyRent = value;
+          // Update all monthly rent inputs
+          updateAllInputs("monthly rent", value);
+        } else if (label.toLowerCase().includes("monthly savings")) {
+          formData.monthlySavings = value;
+          // Update all monthly savings inputs
+          updateAllInputs("monthly savings", value);
+        } else if (label.toLowerCase().includes("home price")) {
+          formData.homePrice = value;
+          // Update all home price inputs
+          updateAllInputs("home price", value);
+        } else if (label.toLowerCase().includes("down payment")) {
+          formData.downPayment = value;
+          // Update all down payment inputs
+          updateAllInputs("down payment", value);
+        } else if (label.toLowerCase().includes("interest rate")) {
+          formData.interestRate = value;
+          // Update all interest rate inputs
+          updateAllInputs("interest rate", value);
+        } else if (label.toLowerCase().includes("annual yield on savings")) {
+          formData.annualYieldOnSavings = value;
+          // Update all annual yield inputs
+          updateAllInputs("annual yield on savings", value);
+        } else if (label.toLowerCase().includes("annual rent increase")) {
+          formData.annualRentIncrease = value;
+          // Update all annual rent increase inputs
+          updateAllInputs("annual rent increase", value);
+        } else if (
+          label.toLowerCase().includes("annual home value appreciation")
+        ) {
+          formData.annualHomeAppreciation = value;
+          // Update all home appreciation inputs
+          updateAllInputs("annual home value appreciation", value);
+        } else if (label.toLowerCase().includes("other housing expenses")) {
+          formData.otherHousingExpenses = value;
+          // Update all housing expenses inputs
+          updateAllInputs("other housing expenses", value);
+        }
+
+        // Update results if we're on the results page
+        if (
+          !document
+            .getElementById("resultsSection")
+            .classList.contains("hidden")
+        ) {
+          updateResults();
+        }
+      }
+
+      // Function to update all inputs with the same label
+      function updateAllInputs(labelText, value) {
+        const allInputs = document.querySelectorAll(
+          'input[type="range"], input[type="text"]'
+        );
+        allInputs.forEach((input) => {
+          const inputLabel =
+            input.closest(".input-group").querySelector("label")?.textContent ||
+            "";
+          if (inputLabel.toLowerCase().includes(labelText.toLowerCase())) {
+            if (input.type === "range") {
+              input.value = value;
+              const span = input.closest(".input-group").querySelector("span");
+              if (span) {
+                updateSliderDisplay(input, span);
+              }
+            } else if (input.type === "text") {
+              // For percentage inputs
+              if (
+                labelText.toLowerCase().includes("rate") ||
+                labelText.toLowerCase().includes("increase") ||
+                labelText.toLowerCase().includes("appreciation") ||
+                labelText.toLowerCase().includes("yield")
+              ) {
+                input.value = value.toFixed(3) + "%";
+              } else {
+                input.value = value.toLocaleString();
+              }
+            }
+          }
+        });
+      }
+
+      // Setup all input listeners
+      function setupInputListeners() {
+        // Setup sliders
+        const sliders = document.querySelectorAll('input[type="range"]');
+        sliders.forEach((slider) => {
+          const span = slider.closest(".input-group").querySelector("span");
+          if (span) {
+            updateSliderDisplay(slider, span);
+            slider.addEventListener("input", () => {
+              updateSliderDisplay(slider, span);
+              updateFormData(slider);
+            });
+          }
+        });
+
+        // Setup select inputs
+        const selects = document.querySelectorAll("select");
+        selects.forEach((select) => {
+          select.addEventListener("change", (e) => {
+            const label =
+              e.target.closest(".input-group").querySelector("label")
+                ?.textContent || "";
+            if (label.toLowerCase().includes("credit")) {
+              formData.creditScore = e.target.value;
+              // Update all credit score selects
+              const allSelects = document.querySelectorAll("select");
+              allSelects.forEach((s) => {
+                if (s !== e.target) {
+                  s.value = e.target.value;
+                }
+              });
+              updateResults();
+            }
+          });
+        });
+
+        // Setup optional settings inputs
+        const optionalInputs = document.querySelectorAll(".input-field");
+        optionalInputs.forEach((input) => {
+          input.addEventListener("change", (e) => {
+            const value = parseFloat(e.target.value);
+            if (!isNaN(value)) {
+              updateFormData(e.target);
+            }
+          });
+        });
+      }
+
+      function calculateMonthlyPayments() {
+        const loanAmount = formData.homePrice - formData.downPayment;
+        const monthlyRate = formData.interestRate / 100 / 12;
+        const loanTerm = 30 * 12; // 30 years
+
+        const principalAndInterest =
+          (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, loanTerm)) /
+          (Math.pow(1 + monthlyRate, loanTerm) - 1);
+
+        const taxesAndInsurance =
+          (formData.homePrice * (formData.otherHousingExpenses / 100)) / 12;
+
+        const mortgageInsurance =
+          formData.downPayment < formData.homePrice * 0.2
+            ? (loanAmount * 0.01) / 12
+            : 0;
+
+        return {
+          principalAndInterest,
+          taxesAndInsurance,
+          mortgageInsurance,
+          total: principalAndInterest + taxesAndInsurance + mortgageInsurance,
+        };
+      }
+
+      function updateResults() {
+        // Calculate years to save 20% down payment
+        const targetDownPayment = formData.homePrice * 0.2;
+        const yearsToSave = calculateYearsToSave(targetDownPayment);
+
+        // Calculate both scenarios
+        const buyNowScenario = calculateBuyNowScenario();
+        const waitScenario = calculateWaitScenario(yearsToSave);
+
+        // Update results in the UI
+        updateResultsUI(yearsToSave, buyNowScenario, waitScenario);
+      }
+
+      function calculateYearsToSave(targetDownPayment) {
+        const monthlySavings = formData.monthlySavings;
+        const currentSavings = formData.downPayment;
+        const annualYield = formData.annualYieldOnSavings / 100;
+
+        let years = 0;
+        let savings = currentSavings;
+
+        while (savings < targetDownPayment && years < 30) {
+          savings += monthlySavings * 12;
+          savings *= 1 + annualYield;
+          years++;
+        }
+
+        return years.toFixed(2);
+      }
+
+      function calculateBuyNowScenario() {
+        const monthlyPayments = calculateMonthlyPayments();
+        const downPaymentPercentage = Math.min(
+          ((formData.downPayment / formData.homePrice) * 100).toFixed(0),
+          100
+        );
+
+        // Calculate minimum down payment (3%)
+        const minimumDownPayment = formData.homePrice * 0.03;
+
+        return {
+          downPayment: formData.downPayment,
+          downPaymentPercentage,
+          minimumDownPayment,
+          monthlyPayments,
+          totalRentPaid: 0,
+          homePrice: formData.homePrice,
+        };
+      }
+
+      function calculateWaitScenario(yearsToSave) {
+        // Calculate future home price with appreciation
+        const futureHomePrice =
+          formData.homePrice *
+          Math.pow(1 + formData.annualHomeAppreciation / 100, yearsToSave);
+
+        // Calculate total rent paid during waiting period
+        const totalRentPaid = calculateTotalRentPaid(yearsToSave);
+
+        // Calculate future monthly payments
+        const futureMonthlyPayments =
+          calculateFutureMonthlyPayments(futureHomePrice);
+
+        return {
+          yearsToSave,
+          futureHomePrice,
+          totalRentPaid,
+          monthlyPayments: futureMonthlyPayments,
+          downPayment: futureHomePrice * 0.2, // 20% down payment
+        };
+      }
+
+      function calculateTotalRentPaid(years) {
+        let totalRent = 0;
+        let currentRent = formData.monthlyRent;
+
+        for (let year = 0; year < years; year++) {
+          totalRent += currentRent * 12;
+          currentRent *= 1 + formData.annualRentIncrease / 100;
+        }
+
+        return totalRent;
+      }
+
+      function calculateFutureMonthlyPayments(futureHomePrice) {
+        const loanAmount = futureHomePrice * 0.8; // 80% loan
+        const monthlyRate = formData.interestRate / 100 / 12;
+        const loanTerm = 30 * 12; // 30 years
+
+        const principalAndInterest =
+          (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, loanTerm)) /
+          (Math.pow(1 + monthlyRate, loanTerm) - 1);
+
+        const taxesAndInsurance =
+          (futureHomePrice * (formData.otherHousingExpenses / 100)) / 12;
+
+        return {
+          principalAndInterest,
+          taxesAndInsurance,
+          mortgageInsurance: 0, // No PMI with 20% down
+          total: principalAndInterest + taxesAndInsurance,
+        };
+      }
+
+      function updateResultsUI(yearsToSave, buyNow, wait) {
+        // Update main text
+        const mainText = document.querySelector(".parasize");
+        if (mainText) {
+          const homeEquity = calculateHomeEquity(yearsToSave);
+          const minimumDownPayment = buyNow.minimumDownPayment;
+
+          mainText.innerHTML = `
+            <span class="highlight">You're ready to buy now!</span> Rather than wait 
+            <strong>${yearsToSave} years</strong> before you buy, it's possible to buy now with as little as 
+            <strong>3%</strong> down or <strong>$${minimumDownPayment.toLocaleString()}</strong>. Consider this: if you buy now, after 
+            ${yearsToSave} years you will have reached <strong>$${homeEquity.equity.toLocaleString()}</strong> in home equity. 
+            Rent payments build zero equity.
+          `;
+        }
+
+        // Update comparison table
+        const comparisonTable = document.querySelector(
+          ".comparison-table table"
+        );
+        if (comparisonTable) {
+          comparisonTable.rows[1].cells[0].innerHTML = `<span class="blue-text">Buy Now</span> with your ${buyNow.downPaymentPercentage}% down payment`;
+          comparisonTable.rows[1].cells[1].innerHTML = `<span class="orange-text">${yearsToSave} years</span> to save 20% down payment`;
+
+          comparisonTable.rows[2].cells[0].innerHTML = `<span class="blue-text">$${buyNow.downPayment.toLocaleString()}</span> buy now down payment`;
+          comparisonTable.rows[2].cells[1].innerHTML = `<span class="orange-text">$${wait.downPayment.toLocaleString()}</span> future down payment`;
+
+          comparisonTable.rows[3].cells[0].innerHTML = `<span class="blue-text">$${buyNow.totalRentPaid.toLocaleString()}</span> lost on rent payments if you buy now!`;
+          comparisonTable.rows[3].cells[1].innerHTML = `<span class="orange-text">$${wait.totalRentPaid.toLocaleString()}</span> total rent paid while waiting`;
+
+          comparisonTable.rows[4].cells[0].innerHTML = `<span class="blue-text">$${buyNow.homePrice.toLocaleString()}</span> home price`;
+          comparisonTable.rows[4].cells[1].innerHTML = `<span class="orange-text">$${wait.futureHomePrice.toLocaleString()}</span> home price due to appreciation`;
+        }
+
+        // Update monthly payments table
+        const monthlyTable = document.querySelector("#monthly-table table");
+        if (monthlyTable) {
+          // Buy now column
+          monthlyTable.rows[1].cells[1].textContent =
+            "$" + buyNow.monthlyPayments.principalAndInterest.toFixed(2);
+          monthlyTable.rows[2].cells[1].textContent =
+            "$" + buyNow.monthlyPayments.taxesAndInsurance.toFixed(2);
+          monthlyTable.rows[3].cells[1].textContent =
+            "$" + buyNow.monthlyPayments.mortgageInsurance.toFixed(2);
+          monthlyTable.rows[4].cells[1].textContent =
+            "$" + buyNow.monthlyPayments.total.toFixed(2);
+
+          // Wait column
+          monthlyTable.rows[1].cells[2].textContent =
+            "$" + wait.monthlyPayments.principalAndInterest.toFixed(2);
+          monthlyTable.rows[2].cells[2].textContent =
+            "$" + wait.monthlyPayments.taxesAndInsurance.toFixed(2);
+          monthlyTable.rows[3].cells[2].textContent =
+            "$" + wait.monthlyPayments.mortgageInsurance.toFixed(2);
+          monthlyTable.rows[4].cells[2].textContent =
+            "$" + wait.monthlyPayments.total.toFixed(2);
+        }
+
+        // Update grand totals
+        const grandSection = document.querySelector("#grand-section table");
+        if (grandSection) {
+          const totalSavings = calculateTotalSavings(yearsToSave);
+          const totalHousingPayments =
+            calculateTotalHousingPayments(yearsToSave);
+          const homeEquity = calculateHomeEquity(yearsToSave);
+
+          grandSection.rows[1].cells[1].textContent = "$0";
+          grandSection.rows[1].cells[2].textContent =
+            "$" + totalSavings.toLocaleString();
+
+          grandSection.rows[2].cells[1].textContent =
+            "$" + totalHousingPayments.buyNow.toLocaleString();
+          grandSection.rows[2].cells[2].textContent =
+            "$" + totalHousingPayments.wait.toLocaleString();
+
+          grandSection.rows[3].cells[1].textContent =
+            "$" + homeEquity.equity.toLocaleString();
+          grandSection.rows[3].cells[2].textContent =
+            "$" + homeEquity.waitEquity.toLocaleString();
+        }
+      }
+
+      function calculateTotalSavings(years) {
+        let total = 0;
+        let currentSavings = formData.monthlySavings;
+        const annualYield = formData.annualYieldOnSavings / 100;
+
+        for (let year = 0; year < years; year++) {
+          total += currentSavings * 12;
+          currentSavings *= 1 + annualYield;
+        }
+
+        return total;
+      }
+
+      function calculateTotalHousingPayments(years) {
+        const buyNowPayments = calculateMonthlyPayments();
+        const waitPayments = calculateWaitScenario(years).monthlyPayments;
+
+        return {
+          buyNow: buyNowPayments.total * 12 * years,
+          wait: waitPayments.total * 12 * years,
+        };
+      }
+
+      function calculateHomeEquity(years) {
+        const appreciation = Math.pow(
+          1 + formData.annualHomeAppreciation / 100,
+          years
+        );
+        const futureHomeValue = formData.homePrice * appreciation;
+
+        // Calculate buy now scenario equity
+        const loanAmount = formData.homePrice - formData.downPayment;
+        const monthlyPayment = calculateMonthlyPayments().principalAndInterest;
+        const totalPaid = monthlyPayment * 12 * years;
+        const remainingLoan = loanAmount - totalPaid;
+        const buyNowEquity = futureHomeValue - remainingLoan;
+
+        // Calculate wait scenario equity
+        const waitLoanAmount = futureHomeValue * 0.8; // 80% loan
+        const waitMonthlyPayment =
+          calculateWaitScenario(years).monthlyPayments.principalAndInterest;
+        const waitTotalPaid = waitMonthlyPayment * 12 * years;
+        const waitRemainingLoan = waitLoanAmount - waitTotalPaid;
+        const waitEquity = futureHomeValue - waitRemainingLoan;
+
+        return {
+          futureHomeValue,
+          equity: buyNowEquity,
+          waitEquity: waitEquity,
+        };
+      }
+
+      // Run on page load
+      window.addEventListener("DOMContentLoaded", () => {
+        setupInputListeners();
+        setupSliderUpdates();
+      });
+
+      function toggleDetail(titleElement) {
+        const clickedAdvantage = titleElement.parentElement;
+        const allAdvantages = document.querySelectorAll(".advantage");
+
+        allAdvantages.forEach((adv) => {
+          const details = adv.querySelector(".advantage-details");
+          const icon = adv.querySelector(".advantage-icon");
+
+          if (adv === clickedAdvantage) {
+            // Toggle this advantage
+            const isOpen = adv.classList.contains("open");
+            if (isOpen) {
+              adv.classList.remove("open");
+              details.style.display = "none";
+              icon.textContent = "+";
+            } else {
+              adv.classList.add("open");
+              details.style.display = "block";
+              icon.textContent = "−";
+            }
+          } else {
+            // Close other advantages
+            adv.classList.remove("open");
+            adv.querySelector(".advantage-details").style.display = "none";
+            adv.querySelector(".advantage-icon").textContent = "+";
+          }
+        });
+      }
+
+      function toggleSection(id, header) {
+        const section = document.getElementById(id);
+        const icon = header.querySelector(".icon");
+        const isVisible = section.style.display === "block";
+        section.style.display = isVisible ? "none" : "block";
+        icon.textContent = isVisible ? "+" : "-";
+      }
+
+      function toggleMonthlyTable(header) {
+        const table = document.getElementById("monthly-table");
+        const icon = header.querySelector(".icon");
+        const isVisible = table.style.display === "block";
+        table.style.display = isVisible ? "none" : "block";
+        icon.textContent = isVisible ? "+" : "−";
+        icon.className = isVisible ? "icon plus-icon" : "icon minus-icon";
+      }
+
+      // Update slider value display dynamically
+      function setupSliderUpdates() {
+        const sliders = document.querySelectorAll('input[type="range"]');
+        sliders.forEach((slider) => {
+          const span = slider.closest(".input-group").querySelector("span");
+          if (span) {
+            updateSliderDisplay(slider, span);
+          }
+        });
+      }
+
+      // Adjust slider with + / – buttons
+      function adjustSlider(button, change) {
+        const slider = button.parentElement.querySelector(
+          'input[type="range"]'
+        );
+        if (slider) {
+          const newValue = Math.min(
+            Math.max(
+              parseFloat(slider.value) + parseFloat(change),
+              parseFloat(slider.min)
+            ),
+            parseFloat(slider.max)
+          );
+          slider.value = newValue;
+          const span = slider.closest(".input-group").querySelector("span");
+          updateSliderDisplay(slider, span);
+          updateFormData(slider);
+        }
+      }
+
+      // Format and show slider value in span
+      function updateSliderDisplay(slider, span) {
+        const value = parseFloat(slider.value);
+        const label =
+          slider.closest(".input-group").querySelector("label")?.textContent ||
+          "";
+
+        if (label.toLowerCase().includes("interest rate")) {
+          span.textContent = value.toFixed(3) + "%";
+        } else {
+          span.textContent = "$" + Number(value).toLocaleString();
+        }
+      }
+    </script>
+  </body>
+</html>
